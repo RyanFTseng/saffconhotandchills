@@ -8,8 +8,12 @@ RUN npm install
 
 COPY . .
 
+# Build Vite app
+RUN npm run build
+
 ENV PORT=9000
 
 EXPOSE 9000
 
-CMD ["npm", "start"]
+# Serve built files with 'serve'
+CMD ["npx", "serve", "-s", "dist", "-l", "9000"]
