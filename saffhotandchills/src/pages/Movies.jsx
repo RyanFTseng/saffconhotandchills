@@ -5,7 +5,7 @@ import '../css/Home.css'
 import { SearchMovies, GetPopularMovies} from "../services/api.js"
 
 
-function Home() {
+function Movies() {
     const [searchQuery, setSearchQuery] = useState("");
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
@@ -86,4 +86,4 @@ function Home() {
         
 }
 
-export default Home
+export default Movies
