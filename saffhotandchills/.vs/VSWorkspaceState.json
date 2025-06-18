@@ -2,11 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\assets",
     "\\src\\components",
     "\\src\\contexts",
     "\\src\\css",
-    "\\src\\pages"
+    "\\src\\pages",
+    "\\src\\sprites"
   ],
-  "SelectedNode": "\\src\\css\\Navbar.css",
+  "SelectedNode": "\\src\\sprites\\cold_face.jsx",
   "PreviewInSolutionExplorer": false
 }

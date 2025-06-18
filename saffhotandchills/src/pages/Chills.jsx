@@ -5,12 +5,15 @@ import {
 import {
     Container,
     Graphics,
+    Sprite,
 } from 'pixi.js'
 import { useCallback } from 'react'
+import { Cold_Face } from '../sprites/cold_face'
 
 extend({
     Container,
     Graphics,
+    Sprite,
 })
 
 const Chills = () => {
@@ -25,6 +28,7 @@ const Chills = () => {
         <Application>
             <pixiContainer x={100} y={100}>
                 <pixiGraphics draw={drawCallback} />
+                <Cold_Face />
             </pixiContainer>
         </Application>
     )
