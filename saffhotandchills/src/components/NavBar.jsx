@@ -4,9 +4,10 @@ import '../css/NavBar.css'
 function NavBar() {
     return <div className="navbar">
         <div className="navbar-brand">
-            <Link to = "/"> Chills </Link>
+            <Link to = "/"> Home </Link>
         </div>
         <div className="navbar-links">
+            <Link to = "/chills" className = "nav-link"> Chills</Link>
             <Link to = "/movies" className = "nav-link"> Movies</Link>
             <Link to="/favorites" className="nav-link"> Favorites</Link>
 
