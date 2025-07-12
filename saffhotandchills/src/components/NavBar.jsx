@@ -7,10 +7,11 @@ function NavBar() {
             <Link to = "/"> Home </Link>
         </div>
         <div className="navbar-links">
+              
             <Link to = "/chills" className = "nav-link"> Chills</Link>
             <Link to = "/movies" className = "nav-link"> Movies</Link>
             <Link to="/favorites" className="nav-link"> Favorites</Link>
-
+            <Link to="/saffagent" className="nav-link"> SaffAgent</Link>  
             </div>
     </div>
 }
