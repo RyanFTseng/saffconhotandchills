@@ -3,10 +3,10 @@ import '../css/NavBar.css'
 
 function NavBar() {
     return <div className="navbar">
-        <div className="navbar-brand">
+        <div className="navbar-brand" style={{fontFamily: 'Georgia' }}>
             <Link to = "/"> Home </Link>
         </div>
-        <div className="navbar-links">
+        <div className="navbar-links" style={{fontFamily: 'Georgia' }}>
               
             <Link to = "/chills" className = "nav-link"> Chills</Link>
             <Link to = "/movies" className = "nav-link"> Movies</Link>
