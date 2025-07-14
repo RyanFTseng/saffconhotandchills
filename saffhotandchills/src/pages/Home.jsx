@@ -13,7 +13,7 @@ function Home(){
         try {
             console.log('Fetching data from Lambda...');
 
-            const response = await fetch('https://sn3lzs66psvmk3kdixg6djfrne0ghuau.lambda-url.us-west-1.on.aws/', {
+            const response = await fetch('https://3l4gubpw4sp3lfijdhmwi3x6ue0jzkik.lambda-url.us-west-1.on.aws/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,10 +26,11 @@ function Home(){
             if (!response.ok) {
                 throw new Error(`Lambda responded with status: ${response.status}`);
             }
-
+            //save json response in data useState hook
             const result = await response.json();
             console.log('Lambda response:', result);
             setData(result);
+
         } catch (error) {
             console.error('Error fetching data:', error);
             setError(error.message);
@@ -55,6 +56,7 @@ function Home(){
                     </button>
                 </div>
             ) : (
+                //display lambda response
                 <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
                     <h3 className="text-lg font-semibold mb-2">Lambda Response:</h3>
                     <pre className="text-sm">{JSON.stringify(data, null, 2)}</pre>
