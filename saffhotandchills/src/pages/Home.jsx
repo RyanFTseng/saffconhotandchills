@@ -41,9 +41,10 @@ function Home(){
 
 
     return (
-        <div className = "home-page">
+        <div className="home-page" style={{fontFamily: 'Georgia' }}>
+            <h1>Welcome</h1>
             {loading ? (
-                <p>Loading data from Lambda...</p>
+                <p>Loading data...</p>
             ) : error ? (
                 <div className="bg-red-100 dark:bg-red-900 p-4 rounded-lg">
                     <h3 className="text-lg font-semibold mb-2 text-red-800 dark:text-red-200">Error:</h3>
@@ -58,7 +59,6 @@ function Home(){
             ) : (
                 //display lambda response
                 <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-                    <h3 className="text-lg font-semibold mb-2">Lambda Response:</h3>
                     <pre className="text-sm">{JSON.stringify(data, null, 2)}</pre>
                 </div>
             )}
