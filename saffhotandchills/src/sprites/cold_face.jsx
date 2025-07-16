@@ -8,7 +8,7 @@ import {
     useState,
 } from 'react';
 import { useTick } from '@pixi/react';
-import Cold_Face_Image from '../assets/cold_face.jpg'
+import Cold_Face_Image from '../assets/cold_face.png'
 
 export function Cold_Face() {
     // The Pixi.js `Sprite`
@@ -37,7 +37,7 @@ export function Cold_Face() {
             onClick={(event) => setIsActive(!isActive)}
             onPointerOver={(event) => setIsHover(true)}
             onPointerOut={(event) => setIsHover(false)}
-            scale={isActive ? 1 : 1.5}
+            scale={isActive ? 1: 0.3}
             texture={texture}
             x={100}
             y={100} />
