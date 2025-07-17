@@ -18,6 +18,7 @@ export function Cold_Face() {
     const [isHovered, setIsHover] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const [position, setPosition] = useState({ x: 100, y: 100 })
+    const [keysPressed, setKeysPressed] = useState({})
 
     // Preload the sprite if it hasn't been loaded yet
     useEffect(() => {
@@ -30,44 +31,78 @@ export function Cold_Face() {
         }
     }, [texture]);
 
-    // Keyboard event handler
+    // Keyboard event handlers
     useEffect(() => {
         const handleKeyDown = (event) => {
-            const moveSpeed = 10; // Adjust this value to change movement speed
+            // Prevent default behavior for arrow keys to stop page scrolling
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+                event.preventDefault();
 
-            setPosition(prevPosition => {
-                let newX = prevPosition.x;
-                let newY = prevPosition.y;
-
-                switch (event.key) {
-                    case 'ArrowUp':
-                        newY -= moveSpeed;
-                        break;
-                    case 'ArrowDown':
-                        newY += moveSpeed;
-                        break;
-                    case 'ArrowLeft':
-                        newX -= moveSpeed;
-                        break;
-                    case 'ArrowRight':
-                        newX += moveSpeed;
-                        break;
-                    default:
-                        return prevPosition; // No change if other keys are pressed
-                }
-
-                return { x: newX, y: newY };
-            });
+                setKeysPressed(prev => ({
+                    ...prev,
+                    [event.key]: true
+                }));
+            }
         };
 
-        // Add event listener
-        window.addEventListener('keydown', handleKeyDown);
+        const handleKeyUp = (event) => {
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+                setKeysPressed(prev => ({
+                    ...prev,
+                    [event.key]: false
+                }));
+            }
+        };
 
-        // Cleanup event listener on component unmount
+        // Add event listeners
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+
+        // Cleanup event listeners on component unmount
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
         };
     }, []);
+
+    // Smooth movement using useTick
+    useTick(() => {
+        const moveSpeed = 10; // Adjust this value to change movement speed
+
+        setPosition(prevPosition => {
+            let newX = prevPosition.x;
+            let newY = prevPosition.y;
+
+            if (keysPressed['ArrowUp']) {
+                newY -= moveSpeed;
+            }
+            if (keysPressed['ArrowDown']) {
+                newY += moveSpeed;
+            }
+            if (keysPressed['ArrowLeft']) {
+                newX -= moveSpeed;
+            }
+            if (keysPressed['ArrowRight']) {
+                newX += moveSpeed;
+            }
+
+            // Boundary checks 
+            const canvasWidth = window.innerWidth; //canvas width
+            const canvasHeight = window.innerHeight; //canvas height
+            const spriteWidth = spriteRef.current?.width;
+            const spriteHeight = spriteRef.current?.height; 
+
+            // Clamp position to stay within bounds
+            newX = Math.max(0, Math.min(canvasWidth - spriteHalfWidth, newX));
+            newY = Math.max(0, Math.min(canvasHeight - spriteHalfHeight, newY));
+
+            // Only update if position actually changed
+            if (newX !== prevPosition.x || newY !== prevPosition.y) {
+                return { x: newX, y: newY };
+            }
+            return prevPosition;
+        });
+    });
 
     return (
         <pixiSprite

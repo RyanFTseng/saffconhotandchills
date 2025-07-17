@@ -25,7 +25,7 @@ const Chills = () => {
     }, [])
 
     return (
-        <Application>
+        <Application width={window.innerWidth} height={window.innerHeight}>
             <pixiContainer x={100} y={100}>
                 <pixiGraphics draw={drawCallback} />
                 <Cold_Face />
