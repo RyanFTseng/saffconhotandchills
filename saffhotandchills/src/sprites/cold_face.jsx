@@ -93,8 +93,8 @@ export function Cold_Face() {
             const spriteHeight = spriteRef.current?.height; 
 
             // Clamp position to stay within bounds
-            newX = Math.max(0, Math.min(canvasWidth - spriteHalfWidth, newX));
-            newY = Math.max(0, Math.min(canvasHeight - spriteHalfHeight, newY));
+            newX = Math.max(0, Math.min(canvasWidth - spriteWidth, newX));
+            newY = Math.max(0, Math.min(canvasHeight - spriteHeight, newY));
 
             // Only update if position actually changed
             if (newX !== prevPosition.x || newY !== prevPosition.y) {
@@ -109,9 +109,6 @@ export function Cold_Face() {
             ref={spriteRef}
             anchor={0.5}
             eventMode={'static'}
-            onClick={(event) => setIsActive(!isActive)}
-            onPointerOver={(event) => setIsHover(true)}
-            onPointerOut={(event) => setIsHover(false)}
             scale={isActive ? 1 : 0.3}
             texture={texture}
             x={position.x}
