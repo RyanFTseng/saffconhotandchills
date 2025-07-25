@@ -19,6 +19,7 @@ export function Arrow_Key({ keysPressed}) {
     const centerPosition = { x: 1200, y: 650 }
     const [spacing, setSpacing] = useState(60)
     const scale = 0.2
+    const margin = 10
 
     // Preload the sprite if it hasn't been loaded yet
     useEffect(() => {
@@ -27,7 +28,7 @@ export function Arrow_Key({ keysPressed}) {
                 .load(Arrow_Key_Image)
                 .then((result) => {
                     setTexture(result)
-                    setSpacing(result.width*scale)
+                    setSpacing(result.width*scale+margin)
                     console.log(result.width)
                 });
         }
@@ -35,10 +36,10 @@ export function Arrow_Key({ keysPressed}) {
 
     
     const keyPositions = [
-        { x: centerPosition.x, y: centerPosition.y - spacing, rotation: 0 },            // Up
-        { x: centerPosition.x - spacing, y: centerPosition.y, rotation: -Math.PI / 2 }, // Left  
-        { x: centerPosition.x, y: centerPosition.y, rotation: Math.PI },                // Down
-        { x: centerPosition.x + spacing, y: centerPosition.y, rotation: Math.PI / 2 }   // Right
+        { x: centerPosition.x, y: centerPosition.y - spacing, rotation: 0, key: 'ArrowUp' },                // Up
+        { x: centerPosition.x - spacing, y: centerPosition.y, rotation: -Math.PI / 2, key: 'ArrowLeft' },   // Left  
+        { x: centerPosition.x, y: centerPosition.y, rotation: Math.PI, key: 'ArrowDown' },                  // Down
+        { x: centerPosition.x + spacing, y: centerPosition.y, rotation: Math.PI / 2, key: 'ArrowRight' }    // Right
     ];
 
     return (
