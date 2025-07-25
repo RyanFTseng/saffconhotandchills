@@ -16,7 +16,14 @@ export function Arrow_Key({ keysPressed}) {
 
     const [texture, setTexture] = useState(Texture.EMPTY)
     const [isActive, setIsActive] = useState(false)
-    const centerPosition = { x: 1200, y: 650 }
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    })
+    const centerPosition = {
+        x: windowSize.width * 0.70,   // 90% from left (near right edge)
+        y: windowSize.height * 0.75  // 85% from top (near bottom)
+    }
     const [spacing, setSpacing] = useState(60)
     const scale = 0.2
     const margin = 10

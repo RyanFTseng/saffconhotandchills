@@ -13,7 +13,10 @@ import Cold_Face_Image from '../assets/cold_face.png'
 export function Cold_Face({ keysPressed }) {
     // The Pixi.js `Sprite`
     const spriteRef = useRef(null)
-
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    })
     const [texture, setTexture] = useState(Texture.EMPTY)
     const [isActive, setIsActive] = useState(false)
     const [position, setPosition] = useState({ x: 100, y: 100 })
@@ -51,8 +54,8 @@ export function Cold_Face({ keysPressed }) {
             }
 
             // Boundary checks 
-            const canvasWidth = window.innerWidth; //canvas width
-            const canvasHeight = window.innerHeight; //canvas height
+            const canvasWidth = windowSize.width; //canvas width
+            const canvasHeight = windowSize.height; //canvas height
             const spriteWidth = spriteRef.current?.width;
             const spriteHeight = spriteRef.current?.height;
 
