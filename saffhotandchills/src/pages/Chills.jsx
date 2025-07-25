@@ -10,6 +10,7 @@ import {
 import { useCallback } from 'react'
 import { Cold_Face } from '../sprites/cold_face'
 import Arrow_Key from '../sprites/arrow_key'
+import KeyHandler from '../components/KeyHandler'
 
 extend({
     Container,
@@ -22,8 +23,7 @@ const Chills = () => {
     return (
         <Application width={window.innerWidth} height={window.innerHeight}>
             <pixiContainer x={100} y={100}>
-                <Cold_Face />
-                <Arrow_Key/>
+                <KeyHandler></KeyHandler>
             </pixiContainer>
         </Application>
     )

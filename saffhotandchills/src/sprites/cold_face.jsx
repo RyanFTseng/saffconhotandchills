@@ -10,15 +10,13 @@ import {
 import { useTick } from '@pixi/react';
 import Cold_Face_Image from '../assets/cold_face.png'
 
-export function Cold_Face() {
+export function Cold_Face({ keysPressed }) {
     // The Pixi.js `Sprite`
     const spriteRef = useRef(null)
 
     const [texture, setTexture] = useState(Texture.EMPTY)
-    const [isHovered, setIsHover] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const [position, setPosition] = useState({ x: 100, y: 100 })
-    const [keysPressed, setKeysPressed] = useState({})
 
     // Preload the sprite if it hasn't been loaded yet
     useEffect(() => {
@@ -30,40 +28,6 @@ export function Cold_Face() {
                 });
         }
     }, [texture]);
-
-    // Keyboard event handlers
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            // Prevent default behavior for arrow keys to stop page scrolling
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-                event.preventDefault();
-
-                setKeysPressed(prev => ({
-                    ...prev,
-                    [event.key]: true
-                }));
-            }
-        };
-
-        const handleKeyUp = (event) => {
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-                setKeysPressed(prev => ({
-                    ...prev,
-                    [event.key]: false
-                }));
-            }
-        };
-
-        // Add event listeners
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('keyup', handleKeyUp);
-
-        // Cleanup event listeners on component unmount
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
-        };
-    }, []);
 
     // Smooth movement using useTick
     useTick(() => {
@@ -90,7 +54,7 @@ export function Cold_Face() {
             const canvasWidth = window.innerWidth; //canvas width
             const canvasHeight = window.innerHeight; //canvas height
             const spriteWidth = spriteRef.current?.width;
-            const spriteHeight = spriteRef.current?.height; 
+            const spriteHeight = spriteRef.current?.height;
 
             // Clamp position to stay within bounds
             newX = Math.max(0, Math.min(canvasWidth - spriteWidth, newX));
@@ -103,6 +67,7 @@ export function Cold_Face() {
             return prevPosition;
         });
     });
+    
 
     return (
         <pixiSprite
