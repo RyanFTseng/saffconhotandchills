@@ -2,11 +2,9 @@ import { useState } from 'react';
 
 function SaffAgent() {
     const [inputText, setInputText] = useState('');
-    const [submittedText, setSubmittedText] = useState('');
-    const [showOutput, setShowOutput] = useState(false);
+    const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [apiResult, setApiResult] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +20,7 @@ function SaffAgent() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    message: inputText, 
+                    message: inputText,
                     timestamp: new Date().toISOString()
                 })
             });
@@ -33,9 +31,15 @@ function SaffAgent() {
 
             const result = await response.json();
 
-            setApiResult(result);
-            setSubmittedText(inputText);
-            setShowOutput(true);
+            // Add the new message to the messages array
+            const newMessage = {
+                id: Date.now(),
+                userMessage: inputText,
+                apiResponse: result.response || 'Server Error',
+                timestamp: new Date().toLocaleString()
+            };
+
+            setMessages(prevMessages => [...prevMessages, newMessage]);
             setInputText('');
 
             // You can handle the response here
@@ -60,6 +64,37 @@ function SaffAgent() {
                 borderRadius: '8px',
                 boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
             }}>
+                {messages.length > 0 && (
+                    <div style={{
+                        marginBottom: '16px',
+                        maxHeight: '300px',
+                        overflowY: 'auto',
+                        border: '1px solid #394047ff',
+                        borderRadius: '6px'
+                    }}>
+                        {messages.map((message) => (
+                            <div key={message.id} style={{
+                                padding: '16px',
+                                backgroundColor: '#394047ff',
+                                borderBottom: '1px solid #191616ff',
+                                borderLeft: '4px solid #3B82F6'
+                            }}>
+                                <h3 style={{ fontWeight: '600', color: '#e3e9f2ff', marginBottom: '8px' }}>
+                                    You submitted:
+                                </h3>
+                                <p style={{ color: '#ddeaffff', marginBottom: '8px' }}>"{message.userMessage}"</p>
+                                <p style={{ fontSize: '12px', color: '#e5edffff', marginBottom: '12px' }}>
+                                    Submitted at: {message.timestamp}
+                                </p>
+                                <h3 style={{ fontWeight: '600', color: '#e3e9f2ff', marginBottom: '8px' }}>
+                                    Response:
+                                </h3>
+                                <p style={{ color: '#ddeaffff', marginBottom: '0px' }}>"{message.apiResponse}"</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
                 <div style={{ marginBottom: '16px' }}>
                     <label
                         htmlFor="textInput"
@@ -112,28 +147,6 @@ function SaffAgent() {
                 >
                     Submit
                 </button>
-
-                {showOutput && (
-                    <div style={{
-                        marginTop: '16px',
-                        padding: '16px',
-                        backgroundColor: '#394047ff',
-                        borderRadius: '6px',
-                        borderLeft: '4px solid #3B82F6'
-                    }}>
-                        <h3 style={{ fontWeight: '600', color: '#e3e9f2ff', marginBottom: '8px' }}>
-                            You submitted:
-                        </h3>
-                        <p style={{ color: '#ddeaffff', marginBottom: '8px' }}>"{submittedText}"</p>
-                        <p style={{ fontSize: '12px', color: '#e5edffff' }}>
-                            Submitted at: {new Date().toLocaleString()}
-                        </p>
-                        <h3 style={{ fontWeight: '600', color: '#e3e9f2ff', marginBottom: '8px' }}>
-                            Response:
-                        </h3>
-                        <p style={{ color: '#ddeaffff', marginBottom: '8px' }}>"{apiResult.response || 'Server Error'}"</p>
-                    </div>
-                )}
             </div>
         </div>
     );

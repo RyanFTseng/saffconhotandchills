@@ -9,7 +9,6 @@ import {
 } from 'pixi.js'
 import { useCallback } from 'react'
 import { Cold_Face } from '../sprites/cold_face'
-import Arrow_Key from '../sprites/arrow_key'
 import KeyHandler from '../components/KeyHandler'
 
 extend({

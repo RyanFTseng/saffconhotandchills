@@ -2,7 +2,7 @@ import {
     useEffect,
     useState,
 } from 'react';
-import { useTick } from '@pixi/react';
+
 
 import Arrow_Key from '../sprites/arrow_key'
 import Cold_Face from '../sprites/cold_face';
