@@ -34,7 +34,7 @@ export function Cold_Face({ keysPressed }) {
 
     // Smooth movement using useTick
     useTick(() => {
-        const moveSpeed = 10; // Adjust this value to change movement speed
+        const moveSpeed = 10;
 
         setPosition(prevPosition => {
             let newX = prevPosition.x;
@@ -59,9 +59,12 @@ export function Cold_Face({ keysPressed }) {
             const spriteWidth = spriteRef.current?.width;
             const spriteHeight = spriteRef.current?.height;
 
+            const halfWidth = spriteWidth/2;
+            const halfHeight = spriteHeight/2;
+
             // Clamp position to stay within bounds
-            newX = Math.max(0, Math.min(canvasWidth - spriteWidth, newX));
-            newY = Math.max(0, Math.min(canvasHeight - spriteHeight, newY));
+            newX = Math.max(0 + halfWidth, Math.min(canvasWidth - halfHeight, newX));
+            newY = Math.max(0 + halfHeight, Math.min(canvasHeight - halfHeight, newY));
 
             // Only update if position actually changed
             if (newX !== prevPosition.x || newY !== prevPosition.y) {
@@ -70,14 +73,14 @@ export function Cold_Face({ keysPressed }) {
             return prevPosition;
         });
     });
-    
+
 
     return (
         <pixiSprite
             ref={spriteRef}
             anchor={0.5}
             eventMode={'static'}
-            scale={isActive ? 1 : 0.3}
+            scale={isActive ? 1 : 0.2}
             texture={texture}
             x={position.x}
             y={position.y} />

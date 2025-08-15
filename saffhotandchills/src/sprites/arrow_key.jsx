@@ -21,8 +21,8 @@ export function Arrow_Key({ keysPressed}) {
         height: window.innerHeight
     })
     const centerPosition = {
-        x: windowSize.width * 0.70,   // 90% from left (near right edge)
-        y: windowSize.height * 0.75  // 85% from top (near bottom)
+        x: windowSize.width * 0.80,   
+        y: windowSize.height * 0.85  
     }
     const [spacing, setSpacing] = useState(60)
     const scale = 0.2

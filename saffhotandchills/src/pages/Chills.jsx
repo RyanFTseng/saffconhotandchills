@@ -7,8 +7,6 @@ import {
     Graphics,
     Sprite,
 } from 'pixi.js'
-import { useCallback } from 'react'
-import { Cold_Face } from '../sprites/cold_face'
 import KeyHandler from '../components/KeyHandler'
 
 extend({
@@ -21,7 +19,7 @@ const Chills = () => {
 
     return (
         <Application width={window.innerWidth} height={window.innerHeight}>
-            <pixiContainer x={100} y={100}>
+            <pixiContainer x={0} y={0}>
                 <KeyHandler></KeyHandler>
             </pixiContainer>
         </Application>
