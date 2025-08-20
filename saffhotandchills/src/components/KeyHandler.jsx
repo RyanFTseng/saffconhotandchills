@@ -6,11 +6,11 @@ import {
 
 import Arrow_Key from '../sprites/arrow_key'
 import Cold_Face from '../sprites/cold_face';
+import Item from '../sprites/item';
+
 // Keyboard controls
 function KeyHandler() {
     const [keysPressed, setKeysPressed] = useState({})
-
-    const [position, setPosition] = useState({ x: 100, y: 100 })
     useEffect(() => {
         const handleKeyDown = (event) => {
             // Prevent default behavior for arrow keys to stop page scrolling
@@ -44,12 +44,13 @@ function KeyHandler() {
         };
     }, []);
 
-    
+
     
     
     return (
         <>
             <Arrow_Key keysPressed={keysPressed} />
+            <Item />
             <Cold_Face keysPressed={keysPressed} />
         </>
     )

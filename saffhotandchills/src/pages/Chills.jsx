@@ -9,6 +9,7 @@ import {
 } from 'pixi.js'
 import KeyHandler from '../components/KeyHandler'
 
+
 extend({
     Container,
     Graphics,
@@ -20,7 +21,11 @@ const Chills = () => {
     return (
         <Application width={window.innerWidth} height={window.innerHeight}>
             <pixiContainer x={0} y={0}>
-                <KeyHandler></KeyHandler>
+                
+                <KeyHandler>
+                    
+                </KeyHandler>
+                
             </pixiContainer>
         </Application>
     )
